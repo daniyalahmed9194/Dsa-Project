@@ -84,7 +84,40 @@ def mergeSort(array, column):
 
     return array
 
+def countingSort(array, column):
+ 
+    maxIndex = max(range(len(array)), key=lambda i: array[i][column])
+    maxValue = array[maxIndex][column]
 
+
+    lengthArray = len(array)
+
+
+    countingArray = [0] * (maxValue + 1)
+    outputArray = [0] * lengthArray
+
+
+    for value in array:
+        index = value[column]
+        countingArray[index] += 1
+
+    for i in range(1, len(countingArray)):
+        countingArray[i] += countingArray[i - 1]
+
+ 
+    for value in array: 
+        index = value[column]
+        outputArray[countingArray[index] - 1] = value 
+        countingArray[index] -= 1
+
+   
+    for i in range(lengthArray):
+        array[i] = outputArray[i]
+
+    return array
+
+
+    
 
 
 array = [
@@ -95,7 +128,7 @@ array = [
     [5, 'Eve', 80]
 ]
 
-sortedArray = mergeSort(array, 1)
+sortedArray = countingSort(array, 2)
 
 for row in sortedArray:
     print(row)
