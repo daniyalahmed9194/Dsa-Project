@@ -1,5 +1,5 @@
 import sys
-from  PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QLabel, QSizePolicy
+from  PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QLabel, QSizePolicy, QHeaderView
 from PyQt5.QtCore import Qt 
 import pandas as pd
 
@@ -26,9 +26,12 @@ class App(QMainWindow):
 
         # creata a label to display sorting time
         self.time_Label=QLabel("Sorting Time: not sorted yet")
-        self.time_Label.setStyleSheet("font-size:16px;"
-                                      "color:blue;"
-                                      "font-weight:bold;")
+        self.time_Label.setStyleSheet("font-size:20px;"
+                                      "color:gray;"
+                                      "font-weight:bold;"
+                                      "padding-left:200;"
+                                      "padding-top:20;")
+                                      
         main_layout.addWidget(self.time_Label)
 
         # create a table to display data
@@ -36,9 +39,30 @@ class App(QMainWindow):
         self.table.setRowCount(len(data_list))
         self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels(['Brand',"Model","Price","Rating","Storage (GB)","Camera (MP)","Battery (mAh)"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         main_layout.addWidget(self.table)
         self.load_data()
 
+        self.table.setStyleSheet("""
+                                QTableWidget{
+                                 font-size:16px;
+                                 border:1px solid brown;
+                                 background-color:#e8f4ff;
+                                            }
+                                 QHeaderView::section{
+                                 background-color: #787a80;
+                                 padding: 12px;
+                                 font-size: 20px;
+                                 font-family: Arial, Helvetica, sans-serif;
+                                 width:20px;
+                                 border: 1px solid black;
+                                 }
+                                   QTableWidget QTableCornerButton::section {
+                                       background-color: #404040;
+                                       border: 1px solid black;
+                                 }
+                              
+                          """)
         # Sorting ALgorithms button
         button_layout=QHBoxLayout()
         self.add_sorting_button(button_layout,"Insertion Sort",self.insertion_sort)
