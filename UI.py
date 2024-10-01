@@ -30,7 +30,8 @@ class App(QMainWindow):
                                       "color:gray;"
                                       "font-weight:bold;"
                                       "padding-left:200;"
-                                      )
+                                      "padding-top:20;")
+                                      
         main_layout.addWidget(self.time_Label)
 
         # create a table to display data
