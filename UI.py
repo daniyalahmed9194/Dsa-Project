@@ -41,23 +41,7 @@ class App(QMainWindow):
         self.load_data()
 
         self.table.setStyleSheet("""
-                                QTableWidget{
-                                 font-size:16px;
-                                 border:1px solid brown;
-                                 background-color:#e8f4ff;
-                                            }
-                                 QHeaderView::section{
-                                 background-color: #787a80;
-                                 padding: 12px;
-                                 font-size: 20px;
-                                 font-family: Arial, Helvetica, sans-serif;
-                                 width:20px;
-                                 border: 1px solid black;
-                                 }
-                                   QTableWidget QTableCornerButton::section {
-                                       background-color: #404040;
-                                       border: 1px solid black;
-                                 }
+                               
                               
                           """)
         # Sorting ALgorithms button
