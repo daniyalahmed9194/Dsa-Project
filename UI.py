@@ -2,7 +2,7 @@ import sys
 from  PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QLabel, QSizePolicy, QHeaderView,QLineEdit
 from PyQt5.QtCore import Qt 
 import pandas as pd
-from sortingAlgos import bubbleSort,selectionSort,mergeSort,sortQuick,insertionSort,countingSort
+from sortingAlgos import bubbleSort,selectionSort,mergeSort,sortQuick,insertionSort,countingSort,radixS,bucket_sort
 import time
 
 
@@ -228,9 +228,35 @@ class App(QMainWindow):
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
 
     def radix_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        radixS(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def bucket_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        bucket_sort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+    
     def reset(self):
         global data_list
         df=pd.read_csv("Data.csv")
