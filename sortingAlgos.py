@@ -128,7 +128,7 @@ array = [
     [5, 'Eve', 80]
 ]
 
-sortedArray = countingSort(array, 2)
+sortedArray = countingSort(array,2)
 
 for row in sortedArray:
     print(row)
