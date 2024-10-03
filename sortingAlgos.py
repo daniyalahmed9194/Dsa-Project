@@ -194,9 +194,8 @@ array = [
     [5, 'Eve', 80]
 ]
 
-sortedArray = bucket_sort(array, 2)
 
-for row in sortedArray:
-    print(row)
+
+  
 
 

@@ -1,8 +1,9 @@
 import sys
-from  PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QLabel, QSizePolicy, QHeaderView
+from  PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QTableWidget, QTableWidgetItem, QPushButton, QHBoxLayout, QLabel, QSizePolicy, QHeaderView,QLineEdit
 from PyQt5.QtCore import Qt 
 import pandas as pd
-
+from sortingAlgos import bubbleSort,selectionSort,mergeSort,sortQuick,insertionSort,countingSort
+import time
 
 
 data_list=[]
@@ -63,6 +64,22 @@ class App(QMainWindow):
                                  }
                               
                           """)
+        
+        # Enter Column Name here:
+        self.column_input = QLineEdit()
+        self.column_input.setPlaceholderText("Enter column name to sort by")
+        self.column_input.setStyleSheet("""
+                  QLineEdit{
+                                        font-size:16px;
+                                        color:black;
+                                        padding:10px;
+                                        width:50%;
+                                        }
+                                        QLineEdit::placeholder{
+                                        color:black;}""")
+        
+        main_layout.addWidget(self.column_input)
+
         # Sorting ALgorithms button
         button_layout=QHBoxLayout()
         self.add_sorting_button(button_layout,"Insertion Sort",self.insertion_sort)
@@ -89,6 +106,7 @@ class App(QMainWindow):
                              }
             """)
         main_layout.addWidget(self.Button_reset,alignment=Qt.AlignCenter)
+     
 
         
 
@@ -119,23 +137,108 @@ class App(QMainWindow):
             
     
     def insertion_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        insertionSort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def selection_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        selectionSort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def bubble_sort(self):
-        pass
+
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        bubbleSort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def Merge_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        mergeSort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def Quick_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        sortQuick(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def counting_sort(self):
-        pass
+        column_Name=self.column_input.text().strip()
+        column_index=-1
+        header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
+        if column_Name in header_Labels:
+            column_index=header_Labels.index(column_Name)
+        else:
+            self.time_Label.setText("Invalid Column Name")
+            return
+        start_time = time.time()
+        countingSort(data_list,column_index)
+        end_time=time.time()
+        self.load_data()
+        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+
     def radix_sort(self):
         pass
     def bucket_sort(self):
         pass
-    def reset():
-        pass
+    def reset(self):
+        global data_list
+        df=pd.read_csv("Data.csv")
+        data_list=df.values.tolist()
+        self.load_data()
+        self.time_Label.setText("Sorting Time: Not sorted yet")
+
+        
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
