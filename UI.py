@@ -9,6 +9,8 @@ import time
 data_list=[]
 df=pd.read_csv("Data.csv")
 data_list=df.values.tolist()
+data_list_Bucket=[]
+data_list_Quick=[]
 
 
 
@@ -134,6 +136,19 @@ class App(QMainWindow):
         for row_index,row_data in enumerate(data_list):
             for col_index,item in enumerate(row_data):
                 self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))
+
+    
+    def load_data_Bucket(self):
+       
+        for row_index,row_data in enumerate(data_list_Bucket):
+            for col_index,item in enumerate(row_data):
+                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))    
+
+    def load_data_Quick(self):
+       
+        for row_index,row_data in enumerate(data_list_Quick):
+            for col_index,item in enumerate(row_data):
+                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))   
             
     
     def insertion_sort(self):
@@ -198,6 +213,7 @@ class App(QMainWindow):
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
 
     def Quick_sort(self):
+        global data_list
         column_Name=self.column_input.text().strip()
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
@@ -207,7 +223,7 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
-        sortQuick(data_list,column_index)
+        data_list=sortQuick(data_list,column_index)
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
@@ -243,6 +259,7 @@ class App(QMainWindow):
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
 
     def bucket_sort(self):
+        global data_list
         column_Name=self.column_input.text().strip()
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
@@ -252,7 +269,7 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
-        bucket_sort(data_list,column_index)
+        data_list=bucket_sort(data_list,column_index)
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
