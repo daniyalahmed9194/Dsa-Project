@@ -196,6 +196,9 @@ array = [
 
 
 
-  
+srte = sortQuick(array,0)
+
+for row in srte:
+    print(row)
 
 

@@ -207,7 +207,14 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
-        sortQuick(data_list,column_index)
+        
+        dd = sortQuick(data_list,column_index)
+        for row_index,row_data in enumerate(dd):
+            for col_index,item in enumerate(row_data):
+                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))
+        for row in dd:
+            print(row)
+        
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
