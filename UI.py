@@ -81,7 +81,7 @@ class App(QMainWindow):
         
         main_layout.addWidget(self.column_input)
 
-        # Sorting ALgorithms button
+        # Sorting ALgorithms eight button
         button_layout=QHBoxLayout()
         self.add_sorting_button(button_layout,"Insertion Sort",self.insertion_sort)
         self.add_sorting_button(button_layout,"Selection Sort",self.selection_sort)
