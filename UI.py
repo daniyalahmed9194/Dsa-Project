@@ -9,11 +9,10 @@ import time
 data_list=[]
 df=pd.read_csv("Data.csv")
 data_list=df.values.tolist()
-data_list_Bucket=[]
-data_list_Quick=[]
 
 
 
+# This is main class (App) and this class inherits from QMainWindwo ,set up the main window and widgets
 class App(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -137,18 +136,7 @@ class App(QMainWindow):
             for col_index,item in enumerate(row_data):
                 self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))
 
-    
-    def load_data_Bucket(self):
-       
-        for row_index,row_data in enumerate(data_list_Bucket):
-            for col_index,item in enumerate(row_data):
-                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))    
-
-    def load_data_Quick(self):
-       
-        for row_index,row_data in enumerate(data_list_Quick):
-            for col_index,item in enumerate(row_data):
-                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))   
+      
             
     
     def insertion_sort(self):
