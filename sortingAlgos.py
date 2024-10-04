@@ -87,14 +87,14 @@ def mergeSort(array, column):
             k += 1
 
     return array
-
-def countingSort(array, column):
+# counting sort
+def countingSort(array, column): 
  
-    maxIndex = max(range(len(array)), key=lambda i: array[i][column])
-    maxValue = array[maxIndex][column]
+    maxIndex = max(range(len(array)), key=lambda i: array[i][column]) # finding the index of max value
+    maxValue = array[maxIndex][column] # finding the max value
 
 
-    lengthArray = len(array)
+    lengthArray = len(array) # length of array
 
 
     countingArray = [0] * (maxValue + 1)
