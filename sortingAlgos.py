@@ -133,17 +133,23 @@ def mergeSort(array, column):
     return array
 # counting sort
 def countingSort(array, column):
-    # Get the maximum value after cleaning
-    max_value = max(clean_numeric_value(item[column], column) for item in array)
+    # Get the minimum and maximum values after cleaning
+    cleaned_values = [clean_numeric_value(item[column], column) for item in array]
+    min_value = min(cleaned_values)
+    max_value = max(cleaned_values)
+    
     length_array = len(array)
 
+    # Adjust the range to account for negative values
+    range_of_values = int(max_value - min_value + 1)  # Total range of values
+
     # Create counting array and output array
-    counting_array = [0] * (int(max_value) + 1)
-    output_array = [None] * length_array
+    counting_array = [0] * range_of_values
+    output_array = [0] * length_array
 
     # Count occurrences of each cleaned value
     for value in array:
-        index = int(clean_numeric_value(value[column], column))
+        index = int(clean_numeric_value(value[column], column)) - int(min_value)  # Adjust index by subtracting min_value
         counting_array[index] += 1
 
     # Modify counting array to hold the position of values
@@ -152,7 +158,7 @@ def countingSort(array, column):
 
     # Build the output array
     for value in reversed(array):  # To maintain stability, iterate in reverse order
-        index = int(clean_numeric_value(value[column], column))
+        index = int(clean_numeric_value(value[column], column)) - int(min_value)
         output_array[counting_array[index] - 1] = value
         counting_array[index] -= 1
 
@@ -161,6 +167,7 @@ def countingSort(array, column):
         array[i] = output_array[i]
 
     return array
+
 
 def radixC(arr, exp, column):
     n = len(arr)
@@ -204,20 +211,31 @@ def radixS(arr, column):
 
 
 def bucket_sort(arr, column):
-    max_val = max(clean_numeric_value(row[column],column) for row in arr)
+    # Get the minimum and maximum values after cleaning
+    cleaned_values = [clean_numeric_value(row[column], column) for row in arr]
+    min_val = min(cleaned_values)
+    max_val = max(cleaned_values)
     size = len(arr)
     
+    # Adjust range of the buckets
+    range_of_values = max_val - min_val  # Total range of values
+    
+    # Create buckets
     buckets = [[] for _ in range(size)]
     
+    # Place array elements into their respective buckets
     for row in arr:
-        index = math.floor(clean_numeric_value(row[column],column) * size / (max_val + 1))
+        normalized_value = (clean_numeric_value(row[column], column) - min_val) / (range_of_values + 1)
+        index = math.floor(normalized_value * size)
         buckets[index].append(row)
     
+    # Sort individual buckets and concatenate them
     sorted_arr = []
     for bucket in buckets:
-        sorted_arr.extend(sorted(bucket, key=lambda x: x[column]))
+        sorted_arr.extend(sorted(bucket, key=lambda x: clean_numeric_value(x[column], column)))
     
     return sorted_arr
+
 
 
 
