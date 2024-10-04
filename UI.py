@@ -42,6 +42,10 @@ class App(QMainWindow):
         self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels(['Title',"Price","Discounted Price","Off","Rating","Sold","Image URL"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.verticalHeader().setFixedWidth(100)
+        for row_index in range(len(data_list)):
+           self.table.setRowHeight(row_index, 40)  
+         
         main_layout.addWidget(self.table)
         self.load_data()
 
@@ -50,6 +54,7 @@ class App(QMainWindow):
                                  font-size:16px;
                                  border:1px solid brown;
                                  background-color:#e8f4ff;
+                                 
                                             }
                                  QHeaderView::section{
                                  background-color: #787a80;
@@ -63,6 +68,7 @@ class App(QMainWindow):
                                        background-color: #404040;
                                        border: 1px solid black;
                                  }
+                                
                               
                           """)
         
@@ -220,6 +226,14 @@ class App(QMainWindow):
 
     def counting_sort(self):
         column_Name=self.column_input.text().strip()
+        if column_Name=="Title" or column_Name=="Image URL":
+            self.time_Label.setText(f"* Counting Sort is not applicable for {column_Name} column *")
+            self.time_Label.setStyleSheet("color:red;"
+                                          "font-size:20px;"
+                                          "font-weight:bold;"
+                                      "padding-left:200;"
+                                      "padding-top:20;")
+            return
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
         if column_Name in header_Labels:
@@ -235,6 +249,14 @@ class App(QMainWindow):
 
     def radix_sort(self):
         column_Name=self.column_input.text().strip()
+        if column_Name=="Title" or column_Name=="Image URL":
+            self.time_Label.setText(f"* Radix Sort is not applicable for {column_Name} column *")
+            self.time_Label.setStyleSheet("color:red;"
+                                          "font-size:20px;"
+                                          "font-weight:bold;"
+                                      "padding-left:200;"
+                                      "padding-top:20;")
+            return
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
         if column_Name in header_Labels:
@@ -251,6 +273,14 @@ class App(QMainWindow):
     def bucket_sort(self):
         global data_list
         column_Name=self.column_input.text().strip()
+        if column_Name=="Title" or column_Name=="Image URL":
+            self.time_Label.setText(f"* Bucket Sort is not applicable for {column_Name} column *")
+            self.time_Label.setStyleSheet("color:red;"
+                                          "font-size:20px;"
+                                          "font-weight:bold;"
+                                      "padding-left:200;"
+                                      "padding-top:20;")
+            return
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
         if column_Name in header_Labels:
@@ -270,6 +300,11 @@ class App(QMainWindow):
         data_list=df.values.tolist()
         self.load_data()
         self.time_Label.setText("Sorting Time: Not sorted yet")
+        self.time_Label.setStyleSheet("color:gray;"
+                                          "font-size:20px;"
+                                          "font-weight:bold;"
+                                      "padding-left:200;"
+                                      "padding-top:20;")
 
         
 
