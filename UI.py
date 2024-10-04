@@ -7,7 +7,7 @@ import time
 
 
 data_list=[]
-df=pd.read_csv("Data.csv")
+df=pd.read_csv("data1.csv")
 data_list=df.values.tolist()
 
 
@@ -40,7 +40,7 @@ class App(QMainWindow):
         self.table=QTableWidget()
         self.table.setRowCount(len(data_list))
         self.table.setColumnCount(7)
-        self.table.setHorizontalHeaderLabels(['Brand',"Model","Price","Rating","Storage (GB)","Camera (MP)","Battery (mAh)"])
+        self.table.setHorizontalHeaderLabels(['Title',"Price","Discounted Price","Off","Rating","Sold","Image URL"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         main_layout.addWidget(self.table)
         self.load_data()
@@ -138,7 +138,7 @@ class App(QMainWindow):
 
       
             
-    
+    # When Insertion Button clicks ,Insertion Sorting Apply
     def insertion_sort(self):
         column_Name=self.column_input.text().strip()
         column_index=-1
@@ -154,6 +154,7 @@ class App(QMainWindow):
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
 
+    # When selection Button clicks ,selection Sorting Apply
     def selection_sort(self):
         column_Name=self.column_input.text().strip()
         column_index=-1
@@ -168,7 +169,8 @@ class App(QMainWindow):
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
-
+    
+    # When bubble Button clicks ,bubble Sorting Apply
     def bubble_sort(self):
 
         column_Name=self.column_input.text().strip()
@@ -264,7 +266,7 @@ class App(QMainWindow):
     
     def reset(self):
         global data_list
-        df=pd.read_csv("Data.csv")
+        df=pd.read_csv("data1.csv")
         data_list=df.values.tolist()
         self.load_data()
         self.time_Label.setText("Sorting Time: Not sorted yet")
