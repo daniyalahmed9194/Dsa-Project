@@ -81,7 +81,7 @@ class App(QMainWindow):
         
         main_layout.addWidget(self.column_input)
 
-        # Sorting ALgorithms button
+        # Sorting ALgorithms eight button
         button_layout=QHBoxLayout()
         self.add_sorting_button(button_layout,"Insertion Sort",self.insertion_sort)
         self.add_sorting_button(button_layout,"Selection Sort",self.selection_sort)
@@ -152,7 +152,7 @@ class App(QMainWindow):
         insertionSort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     # When selection Button clicks ,selection Sorting Apply
     def selection_sort(self):
@@ -168,7 +168,7 @@ class App(QMainWindow):
         selectionSort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
     
     # When bubble Button clicks ,bubble Sorting Apply
     def bubble_sort(self):
@@ -185,7 +185,7 @@ class App(QMainWindow):
         bubbleSort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def Merge_sort(self):
         column_Name=self.column_input.text().strip()
@@ -200,7 +200,7 @@ class App(QMainWindow):
         mergeSort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def Quick_sort(self):
         global data_list
@@ -213,21 +213,10 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
-<<<<<<< HEAD
-        
-        dd = sortQuick(data_list,column_index)
-        for row_index,row_data in enumerate(dd):
-            for col_index,item in enumerate(row_data):
-                self.table.setItem(row_index,col_index,QTableWidgetItem(str(item)))
-        for row in dd:
-            print(row)
-        
-=======
         data_list=sortQuick(data_list,column_index)
->>>>>>> upstream/main
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def counting_sort(self):
         column_Name=self.column_input.text().strip()
@@ -242,7 +231,7 @@ class App(QMainWindow):
         countingSort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def radix_sort(self):
         column_Name=self.column_input.text().strip()
@@ -257,7 +246,7 @@ class App(QMainWindow):
         radixS(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def bucket_sort(self):
         global data_list
@@ -273,7 +262,7 @@ class App(QMainWindow):
         data_list=bucket_sort(data_list,column_index)
         end_time=time.time()
         self.load_data()
-        self.time_Label.setText(f"Sorting Time: {start_time-end_time}")
+        self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
     
     def reset(self):
         global data_list
