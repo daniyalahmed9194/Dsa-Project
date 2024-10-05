@@ -5,6 +5,7 @@ def clean_numeric_value(value, column):
         try:
             # Strip the currency symbol and commas, then convert to float
             cleaned_value = float(value.replace('Rs.', '').replace(',', '').strip())
+            cleaned_value *= 100
         except ValueError:
             # Handle the case where the value cannot be converted (optional)
             cleaned_value = 0.0  # Default value for invalid entries

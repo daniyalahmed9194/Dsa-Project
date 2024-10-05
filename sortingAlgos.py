@@ -191,7 +191,7 @@ def bucket_sort(arr, column):
     sorted_arr = []
 
     for bucket in buckets:
-        bucket = insertionSort(bucket,column)
+        bucket = mergeSort(bucket,column)
     for bucket in buckets:
         sorted_arr.extend(bucket)
     
