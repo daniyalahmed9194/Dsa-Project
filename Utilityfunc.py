@@ -1,3 +1,4 @@
+import math
 def clean_numeric_value(value, column):
     # Remove 'Rs.' and commas, and convert the string to a float
     if(column==1):
