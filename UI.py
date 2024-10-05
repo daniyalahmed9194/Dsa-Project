@@ -248,15 +248,15 @@ class App(QMainWindow):
         self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def radix_sort(self):
-       
+      
         column_Name=self.column_input.text().strip()
         if column_Name=="Title" or column_Name=="Image URL":
             self.time_Label.setText(f"* Radix Sort is not applicable for {column_Name} column *")
             self.time_Label.setStyleSheet("color:red;"
                                           "font-size:20px;"
                                           "font-weight:bold;"
-                                      "padding-left:200;"
-                                      "padding-top:20;")
+                                          "padding-left:200;"
+                                          "padding-top:20;")
             return
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
@@ -266,8 +266,9 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
+  
         radixS(data_list,column_index)
-      
+
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
@@ -303,8 +304,8 @@ class App(QMainWindow):
         self.load_data()
         self.time_Label.setText("Sorting Time: Not sorted yet")
         self.time_Label.setStyleSheet("color:gray;"
-                                          "font-size:20px;"
-                                          "font-weight:bold;"
+                                      "font-size:20px;"
+                                      "font-weight:bold;"
                                       "padding-left:200;"
                                       "padding-top:20;")
 
