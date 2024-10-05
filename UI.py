@@ -255,8 +255,8 @@ class App(QMainWindow):
             self.time_Label.setStyleSheet("color:red;"
                                           "font-size:20px;"
                                           "font-weight:bold;"
-                                      "padding-left:200;"
-                                      "padding-top:20;")
+                                          "padding-left:200;"
+                                          "padding-top:20;")
             return
         column_index=-1
         header_Labels=[self.table.horizontalHeaderItem(i).text().strip() for i in range(self.table.columnCount())]
