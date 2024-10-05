@@ -248,7 +248,7 @@ class App(QMainWindow):
         self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
 
     def radix_sort(self):
-        global data_list
+      
         column_Name=self.column_input.text().strip()
         if column_Name=="Title" or column_Name=="Image URL":
             self.time_Label.setText(f"* Radix Sort is not applicable for {column_Name} column *")
@@ -266,7 +266,9 @@ class App(QMainWindow):
             self.time_Label.setText("Invalid Column Name")
             return
         start_time = time.time()
-        data_list=radixS(data_list,column_index)
+  
+        radixS(data_list,column_index)
+
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
