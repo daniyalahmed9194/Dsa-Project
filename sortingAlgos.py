@@ -133,12 +133,12 @@ def radixC(arr, exp, column):
     output = [0] * n
 
     # Use a counting array large enough to cover all possible digit values
-    count = [0] * 10  # Adjust size if you expect larger values
+    count = [0] * 20  # Adjust size if you expect larger values
 
     # Store the count of occurrences of each digit
     for i in range(n):
         index = int(clean_numeric_value(arr[i][column], column)) // exp
-        count[index % 10] += 1  # Shift by +10 to handle negative values
+        count[index % 10 + 10] += 1  # Shift by +10 to handle negative values
 
     # Change count[i] so that it contains the actual position of this digit in output[]
     for i in range(1, len(count)):
@@ -147,8 +147,8 @@ def radixC(arr, exp, column):
     # Build the output array using the count array
     for i in range(n - 1, -1, -1):
         index = int(clean_numeric_value(arr[i][column], column)) // exp
-        output[count[index % 10] - 1] = arr[i]
-        count[index % 10] -= 1
+        output[count[index % 10 + 10] - 1] = arr[i]
+        count[index % 10 + 10] -= 1
 
     # Copy the output array to arr[], so that arr[] now contains sorted numbers
     for i in range(n):
@@ -172,41 +172,38 @@ def radixS(arr, column):
 def bucket_sort(arr, column):
     # Get the minimum and maximum values after cleaning
     cleaned_values = [clean_numeric_value(row[column], column) for row in arr]
-   
+    min_val = min(cleaned_values)
     max_val = max(cleaned_values)
-    size = 10
+    size = len(arr)
     
-
+    # Adjust range of the buckets
+    range_of_values = max_val - min_val  # Total range of values
     
     # Create buckets
     buckets = [[] for _ in range(size)]
     
     # Place array elements into their respective buckets
     for row in arr:
-        normalized_value = (clean_numeric_value(row[column], column)) / (max_val + 1)
+        normalized_value = (clean_numeric_value(row[column], column) - min_val) / (range_of_values + 1)
         index = math.floor(normalized_value * size)
         buckets[index].append(row)
     
     # Sort individual buckets and concatenate them
     sorted_arr = []
-
     for bucket in buckets:
+
+        sorted_arr.extend(sorted(bucket, key=lambda x: clean_numeric_value(x[column], column)))
+=======
         bucket = mergeSort(bucket,column)
     for bucket in buckets:
         sorted_arr.extend(bucket)
+
     
     return sorted_arr
 
 
 
-a = [[-1,2,3,4],
-     [-5,2,4,5],
-     [-2,3,3,3]]
 
-sorta = radixS(a,0)
-
-for row in sorta:
-    print(row)
    
 
 
