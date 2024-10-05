@@ -94,13 +94,13 @@ def mergeSort(array, column):
 def countingSort(array, column):
     # Get the minimum and maximum values after cleaning
     cleaned_values = [clean_numeric_value(item[column], column) for item in array]
-    min_value = min(cleaned_values)
+    # min_value = min(cleaned_values)
     max_value = max(cleaned_values)
     
     length_array = len(array)
 
     # Adjust the range to account for negative values
-    range_of_values = int(max_value - min_value + 1)  # Total range of values
+    range_of_values = int(max_value + 1)  # Total range of values
 
     # Create counting array and output array
     counting_array = [0] * range_of_values
@@ -108,7 +108,7 @@ def countingSort(array, column):
 
     # Count occurrences of each cleaned value
     for value in array:
-        index = int(clean_numeric_value(value[column], column)) - int(min_value)  # Adjust index by subtracting min_value
+        index = int(clean_numeric_value(value[column], column))  # Adjust index by subtracting min_value
         counting_array[index] += 1
 
     # Modify counting array to hold the position of values
@@ -117,7 +117,7 @@ def countingSort(array, column):
 
     # Build the output array
     for value in reversed(array):  # To maintain stability, iterate in reverse order
-        index = int(clean_numeric_value(value[column], column)) - int(min_value)
+        index = int(clean_numeric_value(value[column], column))
         output_array[counting_array[index] - 1] = value
         counting_array[index] -= 1
 
@@ -191,7 +191,7 @@ def bucket_sort(arr, column):
     sorted_arr = []
 
     for bucket in buckets:
-        bucket = insertionSort(bucket,column)
+        bucket = mergeSort(bucket,column)
     for bucket in buckets:
         sorted_arr.extend(bucket)
     
