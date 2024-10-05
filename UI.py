@@ -7,7 +7,7 @@ import time
 
 
 data_list=[]
-df=pd.read_csv("data1.csv")
+df=pd.read_csv("data2.csv")
 data_list=df.values.tolist()
 
 
@@ -39,8 +39,8 @@ class App(QMainWindow):
         # create a table to display data
         self.table=QTableWidget()
         self.table.setRowCount(len(data_list))
-        self.table.setColumnCount(7)
-        self.table.setHorizontalHeaderLabels(['Title',"Price","Discounted Price","Off","Rating","Sold","Image URL"])
+        self.table.setColumnCount(6)
+        self.table.setHorizontalHeaderLabels(['Title',"Price","Off","Rating","Sold","Image URL"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.table.verticalHeader().setFixedWidth(100)
         for row_index in range(len(data_list)):
@@ -299,7 +299,7 @@ class App(QMainWindow):
     
     def reset(self):
         global data_list
-        df=pd.read_csv("data1.csv")
+        df=pd.read_csv("data2.csv")
         data_list=df.values.tolist()
         self.load_data()
         self.time_Label.setText("Sorting Time: Not sorted yet")
