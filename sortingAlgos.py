@@ -191,9 +191,13 @@ def bucket_sort(arr, column):
     # Sort individual buckets and concatenate them
     sorted_arr = []
     for bucket in buckets:
-        bucket = insertionSort(bucket,column)
+<<<<<<<<< Temporary merge branch 1
+        bucket = mergeSort(bucket,column)
     for bucket in buckets:
         sorted_arr.extend(bucket)
+=========
+        sorted_arr.extend(sorted(bucket, key=lambda x: clean_numeric_value(x[column], column)))
+>>>>>>>>> Temporary merge branch 2
     
     return sorted_arr
 
