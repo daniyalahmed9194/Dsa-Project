@@ -29,20 +29,23 @@ def clean_numeric_value(value, column):
             cleaned_value = 0.0  
         return cleaned_value
     elif (column==4):
-        cleaned_value = value.replace('sold', '').strip()
-    
-        try:
-            # Check if it ends with 'K' for thousands
-            if cleaned_value.endswith('K'):
-                # Convert to float and multiply by 1000
-                cleaned_value = float(cleaned_value[:-1]) * 1000  
-            else:
-                # Convert directly to float
-                cleaned_value = float(cleaned_value)
-        except ValueError:
-            # Handle cases where conversion fails
-            cleaned_value = 0.0
-        cleaned_value = math.floor(cleaned_value)
+        if isinstance(value,str):
+            cleaned_value = value.replace('sold', '').strip()
+        
+            try:
+                # Check if it ends with 'K' for thousands
+                if cleaned_value.endswith('K'):
+                    # Convert to float and multiply by 1000
+                    cleaned_value = float(cleaned_value[:-1]) * 1000  
+                else:
+                    # Convert directly to float
+                    cleaned_value = float(cleaned_value)
+            except ValueError:
+                # Handle cases where conversion fails
+                cleaned_value = 0.0
+            cleaned_value = math.floor(cleaned_value)
+        else:
+            cleaned_value = 0
         return cleaned_value
     else:
         return value
