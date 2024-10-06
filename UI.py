@@ -293,6 +293,7 @@ class App(QMainWindow):
             return
         start_time = time.time()
         data_list=bucket_sort(data_list,column_index)
+        print(data_list)
         end_time=time.time()
         self.load_data()
         self.time_Label.setText(f"Sorting Time: {end_time-start_time}")
