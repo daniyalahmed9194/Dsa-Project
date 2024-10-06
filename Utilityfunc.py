@@ -5,17 +5,12 @@ def clean_numeric_value(value, column):
         try:
             # Strip the currency symbol and commas, then convert to float
             cleaned_value = float(value.replace('Rs.', '').replace(',', '').strip())
+            cleaned_value *= 100
         except ValueError:
             # Handle the case where the value cannot be converted (optional)
             cleaned_value = 0.0  # Default value for invalid entries
         return cleaned_value
     elif (column==2):
-        try:
-            cleaned_value = int(value*10)
-        except ValueError:
-            cleaned_value = 0
-        return cleaned_value
-    elif (column==3):
         try:
             if (value=='No discount'):
                 cleaned_value = 0
@@ -24,7 +19,16 @@ def clean_numeric_value(value, column):
         except ValueError:
             cleaned_value = 0.0  # Default value for invalid entries
         return cleaned_value
-    elif (column==5):
+    elif (column==3):
+        try:
+            if (value=='No rating'):
+                cleaned_value = 0
+            else:
+                cleaned_value = int(value)
+        except ValueError:
+            cleaned_value = 0.0  
+        return cleaned_value
+    elif (column==4):
         cleaned_value = value.replace('sold', '').strip()
     
         try:
