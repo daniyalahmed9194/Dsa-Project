@@ -169,37 +169,7 @@ def radixS(arr, column):
 
 
 
-def bucket_sort(arr, column):
-    # Get the minimum and maximum values after cleaning
-    cleaned_values = [clean_numeric_value(row[column], column) for row in arr]
-    min_val = min(cleaned_values)
-    max_val = max(cleaned_values)
-    size = len(arr)
-    
-    # Adjust range of the buckets
-    range_of_values = max_val - min_val  # Total range of values
-    
-    # Create buckets
-    buckets = [[] for _ in range(size)]
-    
-    # Place array elements into their respective buckets
-    for row in arr:
-        normalized_value = (clean_numeric_value(row[column], column) - min_val) / (range_of_values + 1)
-        index = math.floor(normalized_value * size)
-        buckets[index].append(row)
-    
-    # Sort individual buckets and concatenate them
-    sorted_arr = []
-    for bucket in buckets:
-<<<<<<<<< Temporary merge branch 1
-        bucket = mergeSort(bucket,column)
-    for bucket in buckets:
-        sorted_arr.extend(bucket)
-=========
-        sorted_arr.extend(sorted(bucket, key=lambda x: clean_numeric_value(x[column], column)))
->>>>>>>>> Temporary merge branch 2
-    
-    return sorted_arr
+
 
 
 
